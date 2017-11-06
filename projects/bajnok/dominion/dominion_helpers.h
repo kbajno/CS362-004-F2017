@@ -18,5 +18,6 @@ int Smithy(struct gameState * state, int handPos);
 int Feast(struct gameState * state, int choice1);
 int Gardens(struct gameState * state);
 int Mine(struct gameState * state, int choice1, int choice2);
+int Cutpurse(struct gameState * state, int handPos);
 
 #endif
