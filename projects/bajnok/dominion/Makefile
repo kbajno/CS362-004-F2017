@@ -33,6 +33,30 @@ runtests: testDrawCard
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
+randomtestcard1.out: randomtestcard1.c dominion.o interface.o rngs.o
+	echo "randomtestcard1.c:" >> randomtestcard1.out
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 >> randomtestcard1.out
+	gcov -b randomtestcard1.c >> randomtestcard1.out
+
+	gcov -abcdf dominion.c >> randomtestcard1.out
+
+randomtestcard2.out: randomtestcard2.c dominion.o interface.o rngs.o
+	echo "randomtestcard2.c:" >> randomtestcard2.out
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 >> randomtestcard2.out
+	gcov -b randomtestcard2.c >> randomtestcard2.out
+
+	gcov -abcdf dominion.c >> randomtestcard2.out
+
+randomtestadventurer.out: randomtestadventurer.c dominion.o interface.o rngs.o
+	echo "randomtestadventurer.c:" >> randomtestadventurer.out
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	./randomtestadventurer >> randomtestadventurer.out
+	gcov -b randomtestadventurer.c >> randomtestadventurer.out
+
+	gcov -abcdf dominion.c >> randomtestadventurer.out
+
 randomtestresults.out: randomtestadventurer.c randomtestcard1.c randomtestcard2.c dominion.o interface.o rngs.o
 	echo "Results for running random tests:" > randomtestresults.out
 
