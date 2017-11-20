@@ -1,0 +1,27 @@
+Bug one: Adventurer card is not properly discared into the play pile.
+
+How I found it: I found it by running my original unit tests on my team member’s dominion.c file.
+I ran a test that checked the adventurer is no longer in the hand, and that the last card in the played pile is adventurer.
+It failed, so I then inspected the code behind it and found it was wrong. This is the failed test result:
+
+Test 1: Adventurer properly played from hand
+FAIL: Played pile increased = 0, expected = 1
+
+
+Cause: The cause of this bug is due to the discardCard function not being called in adventurer. This would discard the card into the played pile.
+
+Symptoms: This allows adventurer to stay in the player’s hand, meaning they could play it as many times as they would like. This gives them infinite plays which isn’t good.
+
+Bug two: Feast is not properly trashed from hand. 
+
+How I found it: I found it by running my unit tests I created for assignment 3. One of my card tests were for feast,
+and I ran a specific test that checked if the feast card was removed from the hand, and not in the played pile.
+It failed, meaning the card is still left in the player’s hand. This is the failed test result:
+
+Test 1: Feast properly trashed from hand
+FAIL: expected = 0, actual = 1
+
+
+Cause: The cause of this bug is due to discardCard function not being called in adventurer. The function needs to be called with the last parameter proberly set to 1 to indicate the card should be trashed.
+
+Symptoms: This allows the feast card to remain in the players hand even if it is played. This is not good, because the user gets to play the feast card and gain as many treasures as they would like.

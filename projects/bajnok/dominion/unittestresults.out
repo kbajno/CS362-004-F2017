@@ -1,0 +1,441 @@
+Results for running unit tests:
+cardtest1.c:
+TESTING  CARD: adventurer 
+
+Test 1: Adventurer properly played from hand
+PASS: Played pile increased = 1
+
+Test 2: Player's hand has +2 treasure cards
+PASS: expected = 6, actual = 6
+
+Test 3: Player's hand only has +2 cards
+FAIL: expected = 6, actual = 9
+
+Test 4: Non-treasure cards drawn were discarded
+FAIL: expected = 5, actual = 0
+
+Test 5: No change to player 2's hand
+FAIL: expected cards = 0, actual cards = 1
+
+Test 6: No change to kingdom or victory piles
+PASS: card 0 expected = 10, actual = 10
+PASS: card 1 expected = 8, actual = 8
+PASS: card 2 expected = 8, actual = 8
+PASS: card 3 expected = 8, actual = 8
+PASS: card 4 expected = 46, actual = 46
+PASS: card 5 expected = 40, actual = 40
+PASS: card 6 expected = 30, actual = 30
+PASS: card 7 expected = 10, actual = 10
+PASS: card 8 expected = 10, actual = 10
+PASS: card 9 expected = -1, actual = -1
+PASS: card 10 expected = -1, actual = -1
+PASS: card 11 expected = 10, actual = 10
+PASS: card 12 expected = -1, actual = -1
+PASS: card 13 expected = 10, actual = 10
+PASS: card 14 expected = 10, actual = 10
+PASS: card 15 expected = -1, actual = -1
+PASS: card 16 expected = -1, actual = -1
+PASS: card 17 expected = 10, actual = 10
+PASS: card 18 expected = -1, actual = -1
+PASS: card 19 expected = 10, actual = 10
+PASS: card 20 expected = -1, actual = -1
+PASS: card 21 expected = 10, actual = 10
+PASS: card 22 expected = 10, actual = 10
+PASS: card 23 expected = -1, actual = -1
+PASS: card 24 expected = -1, actual = -1
+PASS: card 25 expected = 10, actual = 10
+PASS: card 26 expected = -1, actual = -1
+
+File 'cardtest1.c'
+Lines executed:88.68% of 53
+Branches executed:100.00% of 30
+Taken at least once:66.67% of 30
+Calls executed:72.73% of 22
+Creating 'cardtest1.c.gcov'
+
+cardtest1.c:
+TESTING  CARD: adventurer 
+
+Test 1: Adventurer properly played from hand
+PASS: Played pile increased = 1
+
+Test 2: Player's hand has +2 treasure cards
+PASS: expected = 6, actual = 6
+
+Test 3: Player's hand only has +2 cards
+FAIL: expected = 6, actual = 9
+
+Test 4: Non-treasure cards drawn were discarded
+FAIL: expected = 5, actual = 0
+
+Test 5: No change to player 2's hand
+FAIL: expected cards = 0, actual cards = 1
+
+Test 6: No change to kingdom or victory piles
+PASS: card 0 expected = 10, actual = 10
+PASS: card 1 expected = 8, actual = 8
+PASS: card 2 expected = 8, actual = 8
+PASS: card 3 expected = 8, actual = 8
+PASS: card 4 expected = 46, actual = 46
+PASS: card 5 expected = 40, actual = 40
+PASS: card 6 expected = 30, actual = 30
+PASS: card 7 expected = 10, actual = 10
+PASS: card 8 expected = 10, actual = 10
+PASS: card 9 expected = -1, actual = -1
+PASS: card 10 expected = -1, actual = -1
+PASS: card 11 expected = 10, actual = 10
+PASS: card 12 expected = -1, actual = -1
+PASS: card 13 expected = 10, actual = 10
+PASS: card 14 expected = 10, actual = 10
+PASS: card 15 expected = -1, actual = -1
+PASS: card 16 expected = -1, actual = -1
+PASS: card 17 expected = 10, actual = 10
+PASS: card 18 expected = -1, actual = -1
+PASS: card 19 expected = 10, actual = 10
+PASS: card 20 expected = -1, actual = -1
+PASS: card 21 expected = 10, actual = 10
+PASS: card 22 expected = 10, actual = 10
+PASS: card 23 expected = -1, actual = -1
+PASS: card 24 expected = -1, actual = -1
+PASS: card 25 expected = 10, actual = 10
+PASS: card 26 expected = -1, actual = -1
+
+File 'cardtest1.c'
+Lines executed:88.68% of 53
+Branches executed:100.00% of 30
+Taken at least once:66.67% of 30
+Calls executed:72.73% of 22
+Creating 'cardtest1.c.gcov'
+
+cardtest2.c:
+TESTING  CARD: smithy 
+
+Test 1: Smithy properly played from hand
+FAIL: Played pile increased = 2, expected = 1
+
+Test 2: Player's hand has +3 cards
+FAIL: expected = 7, actual = 6
+
+Test 3: Player's deck has -3 cards
+PASS: expected = 2, actual = 2
+
+Test 4: No change to player 2's hand
+PASS: expected cards = 0, actual cards = 0
+
+Test 5: No change to kingdom or victory piles
+PASS: card 0 expected = 10, actual = 10
+PASS: card 1 expected = 8, actual = 8
+PASS: card 2 expected = 8, actual = 8
+PASS: card 3 expected = 8, actual = 8
+PASS: card 4 expected = 46, actual = 46
+PASS: card 5 expected = 40, actual = 40
+PASS: card 6 expected = 30, actual = 30
+PASS: card 7 expected = 10, actual = 10
+PASS: card 8 expected = 10, actual = 10
+PASS: card 9 expected = -1, actual = -1
+PASS: card 10 expected = -1, actual = -1
+PASS: card 11 expected = 10, actual = 10
+PASS: card 12 expected = -1, actual = -1
+PASS: card 13 expected = 10, actual = 10
+PASS: card 14 expected = 10, actual = 10
+PASS: card 15 expected = -1, actual = -1
+PASS: card 16 expected = -1, actual = -1
+PASS: card 17 expected = 10, actual = 10
+PASS: card 18 expected = -1, actual = -1
+PASS: card 19 expected = 10, actual = 10
+PASS: card 20 expected = -1, actual = -1
+PASS: card 21 expected = 10, actual = 10
+PASS: card 22 expected = 10, actual = 10
+PASS: card 23 expected = -1, actual = -1
+PASS: card 24 expected = -1, actual = -1
+PASS: card 25 expected = 10, actual = 10
+PASS: card 26 expected = -1, actual = -1
+
+File 'cardtest2.c'
+Lines executed:87.18% of 39
+Branches executed:100.00% of 12
+Taken at least once:58.33% of 12
+Calls executed:73.68% of 19
+Creating 'cardtest2.c.gcov'
+
+cardtest3.c:
+TESTING  CARD: feast 
+
+Test 1: Feast properly trashed from hand
+PASS: expected = 0, actual = 0
+
+Test 2: Feast is not in played pile
+PASS: No feast card in played pile
+
+Test 3: Player's hand is unchanged
+FAIL: expected = 5, actual = 4
+
+Test 4: Player recieved 5 coins
+FAIL: total coins expected = 7, actual = 5
+
+Test 5: Can gain card costing < 5 coins (embargo = 2 coins)
+PASS: embargo count expected = 1, actual = 1
+
+File 'cardtest3.c'
+Lines executed:84.44% of 45
+Branches executed:100.00% of 16
+Taken at least once:56.25% of 16
+Calls executed:70.97% of 31
+Creating 'cardtest3.c.gcov'
+
+cardtest4.c:
+TESTING  CARD: mine 
+
+Test 1: Card gained is < 3 coins of trashed card (Trash copper for silver)
+
+Test 1.1: Treasure card properly trashed from hand
+FAIL: expected = 5, actual = 6
+
+Test 1.2: Carded gained in hand correctly
+PASS: expected = 1, actual = 1
+
+Test 2: Card gained is not > 3 coins of trashed card (Trash copper for gold
+
+Test 2.1: Treasure card not trashed
+PASS: expected = 6, actual = 6
+
+Test 2.2: Carded is not gained in hand
+FAIL: expected = 0, actual = 1
+
+File 'cardtest4.c'
+Lines executed:91.84% of 49
+Branches executed:100.00% of 10
+Taken at least once:60.00% of 10
+Calls executed:72.09% of 43
+Creating 'cardtest4.c.gcov'
+
+unittest1.c:
+TESTING  UNIT: buyCard 
+
+Test 1: Adventurer buy success
+FAIL: Player hand pile increased = 0, expected = 1
+
+Test 2: Buy fails because no buys are left
+PASS: Hand count expected = 5, actual = 5
+
+Test 3: Buy fails because no card available
+PASS: Hand count expected = 5, actual = 5
+
+Test 4: Buy fails because no money
+PASS: Hand count expected = 5, actual = 5
+
+Test 5: Card is added to hand
+FAIL: Hand count expected = 6, actual = 5
+
+Test 6: Check for proper coins
+FAIL: Coins expected = 10, actual = 4
+
+File 'unittest1.c'
+Lines executed:86.96% of 46
+Branches executed:100.00% of 12
+Taken at least once:50.00% of 12
+Calls executed:75.00% of 28
+Creating 'unittest1.c.gcov'
+
+unittest2.c:
+Unit Test: updateCoins 
+
+Test 1: Coins properly counted
+FAIL: Coins expected: 14, got: 9
+
+File 'unittest2.c'
+Lines executed:95.24% of 21
+Branches executed:100.00% of 2
+Taken at least once:50.00% of 2
+Calls executed:85.71% of 7
+Creating 'unittest2.c.gcov'
+
+unittest3.c:
+Unit Test: supplyCount 
+
+Test 1: Proper supply count
+PASS: Supply expected: 5, got: 5
+
+Test 1: Embargo supply wasn't adjusted
+PASS: Supply expected: 10, got: 10
+
+Test 1: village supply wasn't adjusted
+PASS: Supply expected: 10, got: 10
+
+Test 1: minion supply wasn't adjusted
+PASS: Supply expected: 10, got: 10
+
+Test 1: cutpurse supply wasn't adjusted
+PASS: Supply expected: 10, got: 10
+
+File 'unittest3.c'
+Lines executed:85.29% of 34
+Branches executed:100.00% of 10
+Taken at least once:50.00% of 10
+Calls executed:73.68% of 19
+Creating 'unittest3.c.gcov'
+
+unittest4.c:
+Unit Test: whoseTurn 
+
+Test 1: Is correct turn
+PASS: Turn for player expected: 0, got: 0
+
+Test 2: Is correct turn compared to prevState
+PASS: Turn for player expected: 0, got: 0
+
+File 'unittest4.c'
+Lines executed:90.91% of 22
+Branches executed:100.00% of 4
+Taken at least once:50.00% of 4
+Calls executed:75.00% of 16
+Creating 'unittest4.c.gcov'
+
+Processing file 1 out of 1
+Function 'updateCoins'
+Lines executed:100.00% of 11
+No branches
+No calls
+
+Function 'gainCard'
+Lines executed:76.92% of 13
+No branches
+No calls
+
+Function 'discardCard'
+Lines executed:92.31% of 13
+No branches
+No calls
+
+Function 'cardEffect'
+Lines executed:20.11% of 189
+No branches
+No calls
+
+Function 'Cutpurse'
+Lines executed:62.50% of 16
+No branches
+No calls
+
+Function 'Mine'
+Lines executed:83.33% of 12
+No branches
+No calls
+
+Function 'Gardens'
+Lines executed:100.00% of 2
+No branches
+No calls
+
+Function 'Feast'
+Lines executed:94.12% of 17
+No branches
+No calls
+
+Function 'Smithy'
+Lines executed:100.00% of 6
+No branches
+No calls
+
+Function 'Adventurer'
+Lines executed:100.00% of 18
+No branches
+No calls
+
+Function 'getCost'
+Lines executed:23.33% of 30
+No branches
+No calls
+
+Function 'drawCard'
+Lines executed:100.00% of 22
+No branches
+No calls
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+No branches
+No calls
+
+Function 'scoreFor'
+Lines executed:0.00% of 24
+No branches
+No calls
+
+Function 'isGameOver'
+Lines executed:0.00% of 10
+No branches
+No calls
+
+Function 'endTurn'
+Lines executed:0.00% of 20
+No branches
+No calls
+
+Function 'whoseTurn'
+Lines executed:100.00% of 2
+No branches
+No calls
+
+Function 'fullDeckCount'
+Lines executed:100.00% of 9
+No branches
+No calls
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+No branches
+No calls
+
+Function 'handCard'
+Lines executed:0.00% of 3
+No branches
+No calls
+
+Function 'numHandCards'
+Lines executed:0.00% of 2
+No branches
+No calls
+
+Function 'buyCard'
+Lines executed:61.54% of 13
+No branches
+No calls
+
+Function 'playCard'
+Lines executed:0.00% of 14
+No branches
+No calls
+
+Function 'shuffle'
+Lines executed:100.00% of 16
+No branches
+No calls
+
+Function 'initializeGame'
+Lines executed:90.32% of 62
+No branches
+No calls
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+No branches
+No calls
+
+Function 'newGame'
+Lines executed:0.00% of 3
+No branches
+No calls
+
+Function 'compare'
+Lines executed:100.00% of 6
+No branches
+No calls
+
+File 'dominion.c'
+Lines executed:45.80% of 572
+Branches executed:48.68% of 417
+Taken at least once:34.77% of 417
+Calls executed:43.56% of 101
+Creating 'dominion.c.gcov'
+
