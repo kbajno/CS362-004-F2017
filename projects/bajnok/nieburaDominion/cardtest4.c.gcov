@@ -1,0 +1,188 @@
+        -:    0:Source:cardtest4.c
+        -:    0:Graph:cardtest4.gcno
+        -:    0:Data:cardtest4.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include <string.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <assert.h>
+        -:    6:#include "rngs.h"
+        -:    7:#include <stdlib.h>
+        -:    8:
+        -:    9:#define TESTCARD "mine"
+        -:   10:
+        -:   11:
+function main called 1 returned 100% blocks executed 77%
+        1:   12:int main() {
+        -:   13:
+        -:   14:	//print out what card we are testing
+        1:   15:	printf("TESTING  CARD: %s \n", TESTCARD);
+call    0 returned 100%
+        -:   16:
+        1:   17:	int i = 0;
+        1:   18:	int rSeed = 10; //seed num
+        1:   19:	int player = 0; //current player
+        1:   20:	int numPlayers = 2; //total players
+        1:   21:	int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        -:   22:
+        -:   23:	struct gameState state, preState; //holds game state
+        1:   24:	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
+        -:   25:		sea_hag, tribute, smithy, council_room}; //cards in game
+        -:   26:
+        -:   27:	//initialize the game state and player cards
+        1:   28:	initializeGame(numPlayers, k, rSeed, &state);
+call    0 returned 100%
+        -:   29:
+        -:   30:	/*Pre-mine played*/
+        -:   31:
+        1:   32:	int preHandCount = state.handCount[player];
+        1:   33:	int prePlayerTwoCount = state.handCount[1];
+        1:   34:	int prePlayedCount = state.playedCardCount;
+        1:   35:	int preDiscardCount = state.discardCount[player];
+        1:   36:	int preDeckCount = state.deckCount[player];
+        -:   37:
+        -:   38:	/*Mine Played*/
+        -:   39:	//cardEffect(mine, choice1, choice2, choice3, &state, handPos, &bonus);
+        -:   40:
+        -:   41:	/*Testing*/
+        -:   42:
+        1:   43:	printf("\nTest 1: Card gained is < 3 coins of trashed card (Trash copper for silver)\n");
+call    0 returned 100%
+        1:   44:	choice1 = copper;
+        1:   45:	choice2 = silver;
+        -:   46:
+        -:   47:	//make sure cards are in hand
+        1:   48:	state.hand[player][0] = mine;
+        1:   49:	state.hand[player][1] = choice1;
+        -:   50:
+        1:   51:	memcpy(&preState, &state, sizeof(struct gameState));
+        -:   52:
+        -:   53:	/*Mine Played*/
+        1:   54:	cardEffect(mine, choice1, choice2, choice3, &state, handPos, &bonus);
+call    0 returned 100%
+        -:   55:
+        -:   56:
+        -:   57:
+        1:   58:	printf("\nTest 1.1: Treasure card properly trashed from hand\n");
+call    0 returned 100%
+        -:   59:
+        1:   60:	if (fullDeckCount(player, copper, &state) ==  ( fullDeckCount(player, copper, &preState) - 1)){
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0%
+        1:   61:		printf("PASS: expected = %d, actual = %d\n", fullDeckCount(player, copper, &preState) - 1 , fullDeckCount(player, copper, &state));
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+        -:   62:	}
+        -:   63:
+        -:   64:	else{
+    #####:   65:		printf("FAIL: expected = %d, actual = %d\n", fullDeckCount(player, copper, &preState) - 1 , fullDeckCount(player, copper, &state));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   66:
+        -:   67:	}
+        -:   68:
+        1:   69:	printf("\nTest 1.2: Carded gained in hand correctly\n");
+call    0 returned 100%
+        -:   70:
+        1:   71:	if (fullDeckCount(player, silver, &state) == ( fullDeckCount(player, silver, &preState) + 1)){
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0%
+        1:   72:		printf("PASS: expected = %d, actual = %d\n", ( fullDeckCount(player, silver, &preState) + 1) , fullDeckCount(player, silver, &state));
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+        -:   73:
+        -:   74:	}
+        -:   75:	else{
+    #####:   76:		printf("FAIL: expected = %d, actual = %d\n", ( fullDeckCount(player, silver, &preState) + 1) , fullDeckCount(player, silver, &state));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   77:
+        -:   78:	} 
+        -:   79:
+        1:   80:	printf("\nTest 2: Card gained is not > 3 coins of trashed card (Trash copper for gold\n");
+call    0 returned 100%
+        -:   81:
+        -:   82:	//reset hand
+        1:   83:	state.handCount[player] = preState.handCount[player];
+        6:   84:	for (i = 0; i < preState.handCount[player]; i++){
+branch  0 taken 83%
+branch  1 taken 17% (fallthrough)
+        5:   85:		state.hand[player][i] = preState.hand[player][i];
+        -:   86:	}
+        -:   87:
+        1:   88:	choice1 = copper;
+        1:   89:	choice2 = gold;
+        -:   90:
+        -:   91:	//make sure cards are in hand
+        1:   92:	state.hand[player][0] = mine;	
+        1:   93:	state.hand[player][1] = choice1;
+        -:   94:
+        1:   95:	memcpy(&preState, &state, sizeof(struct gameState));
+        -:   96:
+        -:   97:	/*Mine Played*/
+        1:   98:	cardEffect(mine, choice1, choice2, choice3, &state, handPos, &bonus);
+call    0 returned 100%
+        -:   99:
+        1:  100:	printf("\nTest 2.1: Treasure card not trashed\n");
+call    0 returned 100%
+        -:  101:
+        1:  102:	if (fullDeckCount(player, copper, &state) ==  ( fullDeckCount(player, copper, &preState))){
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+    #####:  103:		printf("PASS: expected = %d, actual = %d\n", fullDeckCount(player, copper, &preState), fullDeckCount(player, copper, &state));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  104:	}
+        -:  105:
+        -:  106:	else{
+        1:  107:		printf("FAIL: expected = %d, actual = %d\n", fullDeckCount(player, copper, &preState) , fullDeckCount(player, copper, &state));
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+        -:  108:
+        -:  109:	}
+        -:  110:
+        1:  111:	printf("\nTest 2.2: Carded is not gained in hand\n");
+call    0 returned 100%
+        -:  112:
+        1:  113:	if (fullDeckCount(player, gold, &state) == ( fullDeckCount(player, gold, &preState))){
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+    #####:  114:		printf("PASS: expected = %d, actual = %d\n", ( fullDeckCount(player, gold, &preState)) , fullDeckCount(player, gold, &state));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  115:
+        -:  116:	}
+        -:  117:	else{
+        1:  118:		printf("FAIL: expected = %d, actual = %d\n", ( fullDeckCount(player, gold, &preState)) , fullDeckCount(player, gold, &state));
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+        -:  119:
+        -:  120:	} 
+        -:  121:
+        -:  122:
+        -:  123:
+        -:  124:
+        -:  125:	
+        1:  126:	printf("\n");
+call    0 returned 100%
+        -:  127:
+        1:  128:	return 0;
+        -:  129:}

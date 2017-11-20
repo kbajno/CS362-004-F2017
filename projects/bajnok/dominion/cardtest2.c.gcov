@@ -1,0 +1,158 @@
+        -:    0:Source:cardtest2.c
+        -:    0:Graph:cardtest2.gcno
+        -:    0:Data:cardtest2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/*
+        -:    2: * Include the following lines in your makefile:
+        -:    3: *
+        -:    4: * cardtest2: cardtest2.c dominion.o rngs.o
+        -:    5: *      gcc -o cardtest2 -g  cardtest2.c dominion.o rngs.o $(CFLAGS)
+        -:    6: */
+        -:    7:
+        -:    8:/*Code style inspired by cardtest4.c provided on Canvas*/
+        -:    9:
+        -:   10:
+        -:   11:#include "dominion.h"
+        -:   12:#include "dominion_helpers.h"
+        -:   13:#include <string.h>
+        -:   14:#include <stdio.h>
+        -:   15:#include <assert.h>
+        -:   16:#include "rngs.h"
+        -:   17:#include <stdlib.h>
+        -:   18:
+        -:   19:#define TESTCARD "smithy"
+        -:   20:
+        -:   21:
+function main called 1 returned 100% blocks executed 83%
+        1:   22:int main() {
+        -:   23:
+        -:   24:	//print out what card we are testing
+        1:   25:	printf("TESTING  CARD: %s \n", TESTCARD);
+call    0 returned 100%
+        -:   26:
+        1:   27:	int i = 0;
+        1:   28:	int rSeed = 10; //seed num
+        1:   29:	int player = 0; //current player
+        1:   30:	int numPlayers = 2; //total players
+        1:   31:	int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        -:   32:
+        -:   33:	struct gameState state, preState; //holds game state
+        1:   34:	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
+        -:   35:		sea_hag, tribute, smithy, council_room}; //cards in game
+        -:   36:
+        -:   37:	//initialize the game state and player cards
+        1:   38:	initializeGame(numPlayers, k, rSeed, &state);
+call    0 returned 100%
+        1:   39:	memcpy(&preState, &state, sizeof(struct gameState));
+        -:   40:
+        -:   41:	/*Pre-smithy played*/
+        -:   42:
+        1:   43:	int preHandCount = state.handCount[player];
+        1:   44:	int prePlayerTwoCount = state.handCount[1];
+        1:   45:	int prePlayedCount = state.playedCardCount;
+        1:   46:	int preDiscardCount = state.discardCount[player];
+        1:   47:	int preDeckCount = state.deckCount[player];
+        -:   48:
+        -:   49:	/*Smithy Played*/
+        1:   50:	cardEffect(smithy, choice1, choice2, choice3, &state, handPos, &bonus);
+call    0 returned 100%
+        -:   51:
+        -:   52:	/*Post-smithy played*/
+        -:   53:
+        -:   54:
+        -:   55:
+        -:   56:
+        -:   57:	/*Testing*/
+        -:   58:
+        1:   59:	printf("\nTest 1: Smithy properly played from hand\n");
+call    0 returned 100%
+        -:   60:
+        1:   61:	if (state.playedCardCount == (prePlayedCount+1)){
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:   62:		printf("PASS: Played pile increased = %d\n", (state.playedCardCount - prePlayedCount));
+call    0 never executed
+        -:   63:
+        -:   64:	}
+        -:   65:	else{
+        1:   66:		printf("FAIL: Played pile increased = %d, expected = 1\n", (state.playedCardCount - prePlayedCount));
+call    0 returned 100%
+        -:   67:
+        -:   68:	}
+        -:   69:
+        -:   70:
+        1:   71:	printf("\nTest 2: Player's hand has +3 cards\n");
+call    0 returned 100%
+        -:   72:
+        1:   73:	if ((preHandCount + 2) == state.handCount[player]){
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:   74:		printf("PASS: expected = %d, actual = %d\n", (preHandCount + 2) , state.handCount[player]);
+call    0 never executed
+        -:   75:
+        -:   76:	}
+        -:   77:	else{
+        1:   78:		printf("FAIL: expected = %d, actual = %d\n", (preHandCount + 2) , state.handCount[player]);
+call    0 returned 100%
+        -:   79:
+        -:   80:	} 
+        -:   81:
+        1:   82:	printf("\nTest 3: Player's deck has -3 cards\n");
+call    0 returned 100%
+        -:   83:
+        1:   84:	if ( (preDeckCount - 3) == state.deckCount[player]){
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        1:   85:		printf("PASS: expected = %d, actual = %d\n", (preDeckCount-3) , state.deckCount[player]);
+call    0 returned 100%
+        -:   86:
+        -:   87:	}
+        -:   88:	else{
+    #####:   89:		printf("FAIL: expected = %d, actual = %d\n", (preDeckCount-3) , state.deckCount[player]);
+call    0 never executed
+        -:   90:
+        -:   91:	} 
+        -:   92:
+        1:   93:	printf("\nTest 4: No change to player 2's hand\n");
+call    0 returned 100%
+        -:   94:
+        1:   95:	if(prePlayerTwoCount == state.handCount[1] ){
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        1:   96:		printf("PASS: expected cards = %d, actual cards = %d\n", prePlayerTwoCount , state.handCount[1]);
+call    0 returned 100%
+        -:   97:
+        -:   98:	}
+        -:   99:	else{
+    #####:  100:		printf("FAIL: expected cards = %d, actual cards = %d\n", prePlayerTwoCount , state.handCount[1]);
+call    0 never executed
+        -:  101:
+        -:  102:	}
+        -:  103:
+        1:  104:	printf("\nTest 5: No change to kingdom or victory piles\n");
+call    0 returned 100%
+        -:  105:
+       28:  106:	for (i = curse; i <= treasure_map; i++)
+branch  0 taken 96%
+branch  1 taken 4% (fallthrough)
+        -:  107:	{
+        -:  108:		//printf("Card %d - supply count before: %d, supply count after: %d\n", i, startG.supplyCount[i], G.supplyCount[i]);
+       27:  109:		if (state.supplyCount[i] == preState.supplyCount[i]){
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+       27:  110:			printf("PASS: card %d expected = %d, actual = %d\n", i, preState.supplyCount[i], state.supplyCount[i]);
+call    0 returned 100%
+        -:  111:		}
+        -:  112:
+        -:  113:		else{
+    #####:  114:			printf("FAIL: card %d expected = %d, actual = %d\n", i, preState.supplyCount[i], state.supplyCount[i]);
+call    0 never executed
+        -:  115:		}
+        -:  116:	}
+        -:  117:
+        1:  118:	printf("\n");
+call    0 returned 100%
+        -:  119:
+        1:  120:	return 0;
+        -:  121:}

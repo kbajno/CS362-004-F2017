@@ -1,0 +1,281 @@
+        -:    0:Source:randomtestcard2.c
+        -:    0:Graph:randomtestcard2.gcno
+        -:    0:Data:randomtestcard2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include <string.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <assert.h>
+        -:    6:#include "rngs.h"
+        -:    7:#include <stdlib.h>
+        -:    8:
+        -:    9:#define TESTUNIT "cutpurse"
+        -:   10:
+        -:   11:
+function main called 1 returned 100% blocks executed 97%
+        1:   12:int main() {
+        -:   13:
+        -:   14:
+        -:   15:	int i, j, n, p, deckCount, discardCount, handCount, rSeed, numPlayers;
+        1:   16:	int totalFails = 0;
+        1:   17:	int totalPass = 0;
+        1:   18:	int totalTests = 0;
+        1:   19:	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
+        -:   20:		sea_hag, tribute, smithy, council_room}; //cards in game
+        -:   21:	//int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        -:   22:
+        -:   23:
+        -:   24:	struct gameState G, preG;
+        -:   25:
+        -:   26:	//print out what card we are testing
+        1:   27:	printf("RANDOM TESTING: %s \n", TESTUNIT);
+call    0 returned 100%
+        -:   28:
+     2001:   29:	for (n = 0; n < 2000; n++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+        -:   30:		
+        -:   31:		/*initialize game state (num of players, cards, and seed)*/
+        -:   32:
+     2000:   33:		i = 0;
+     2000:   34:		rSeed = rand(); //seed num
+call    0 returned 100%
+     2000:   35:		numPlayers = rand() % 3 + 2; //total players btwn 2-4
+call    0 returned 100%
+     2000:   36:		initializeGame(numPlayers, k, rSeed, &G); //initialize
+call    0 returned 100%
+     2000:   37:		memcpy(&preG, &G, sizeof(struct gameState)); //cpy over to save pre-state before calling card
+        -:   38:
+        -:   39:		/*generate random cards and decks for players*/
+        -:   40:
+     2000:   41:		p = whoseTurn(&G); //get cur player for adjusting deck
+call    0 returned 100%
+        -:   42:
+        -:   43:		//rand cards in deck
+     2000:   44:		deckCount = rand() % MAX_DECK;
+call    0 returned 100%
+     2000:   45:		G.deckCount[p] = deckCount;
+        -:   46:
+   491989:   47:		for (i = 0; i < deckCount; i++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+   489989:   48:			G.deck[p][i] = rand() % treasure_map;
+call    0 returned 100%
+        -:   49:		}
+        -:   50:
+        -:   51:		//rand cards in hand
+     2000:   52:		handCount = rand() % MAX_HAND;
+call    0 returned 100%
+     2000:   53:		int randTreasure = 0;
+        -:   54:
+     8046:   55:		for (i = 0; i < numPlayers; i++){
+branch  0 taken 75%
+branch  1 taken 25% (fallthrough)
+     6046:   56:			G.handCount[p] = handCount;
+     6046:   57:			G.hand[p][0] = cutpurse;
+        -:   58:
+  1508229:   59:			for (j = 1; j < handCount; j++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+  1502183:   60:				randTreasure = rand() % 3;
+call    0 returned 100%
+  1502183:   61:				if (randTreasure == 0){
+branch  0 taken 33% (fallthrough)
+branch  1 taken 67%
+   500362:   62:					G.hand[i][j] = copper;
+        -:   63:
+        -:   64:				}
+  1001821:   65:				else if (randTreasure == 1){
+branch  0 taken 50% (fallthrough)
+branch  1 taken 50%
+   500411:   66:					G.hand[i][j] = silver;
+        -:   67:				}
+        -:   68:				else{
+   501410:   69:					G.hand[i][j] = gold;
+        -:   70:				}
+        -:   71:
+        -:   72:			}
+        -:   73:		}
+        -:   74:
+     2000:   75:		G.handCount[p] = handCount;
+        -:   76:
+   502062:   77:		for (i = 0; i < handCount; i++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+   500062:   78:			G.hand[p][i] = rand() % treasure_map;
+call    0 returned 100%
+        -:   79:		}
+        -:   80:
+        -:   81:		//rand cards in discard
+     2000:   82:		discardCount = rand() % MAX_DECK;
+call    0 returned 100%
+     2000:   83:		G.discardCount[p] = discardCount;
+        -:   84:
+   498763:   85:		for (i = 0; i < discardCount; i++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+   496763:   86:			G.discard[p][i] = rand() % treasure_map;
+call    0 returned 100%
+        -:   87:		}
+        -:   88:
+        -:   89:		/*Pre-Cutpurse Played*/
+        -:   90:
+     2000:   91:		int preHandCount = G.handCount[p];
+     2000:   92:		int prePlayedCount = G.playedCardCount;
+     2000:   93:		int preDiscardCount = G.discardCount[p];
+     2000:   94:		int preDeckCount = G.deckCount[p];
+     2000:   95:		int preTreasure = 0;
+        -:   96:
+        -:   97:		//collect copper count of all players
+     2000:   98:		int preCopper[numPlayers];
+     2000:   99:		int count = 0;
+        -:  100:
+     8046:  101:		for (i = 0; i < numPlayers; i++){
+branch  0 taken 75%
+branch  1 taken 25% (fallthrough)
+  1514265:  102:			for (j = 0; j < G.handCount[p]; j++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+  1508219:  103:				if(G.hand[i][j] == copper) 
+branch  0 taken 23% (fallthrough)
+branch  1 taken 77%
+   353458:  104:				count++;
+        -:  105:			}
+     6046:  106:			preCopper[i] = count;
+     6046:  107:			count = 0;		
+        -:  108:		}
+        -:  109:
+     8046:  110:		for (i = 0; i < numPlayers; i++){
+branch  0 taken 75%
+branch  1 taken 25% (fallthrough)
+     6046:  111:			preCopper[i] = 0;
+        -:  112:		}
+        -:  113:
+        -:  114:		//collect treasure count of current player
+   502062:  115:		for (i = 0; i < G.handCount[p]; i++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+   500062:  116:		if(G.hand[p][i] == copper || G.hand[p][i] == silver || G.hand[p][i] == gold) 
+branch  0 taken 96% (fallthrough)
+branch  1 taken 4%
+branch  2 taken 96% (fallthrough)
+branch  3 taken 4%
+branch  4 taken 4% (fallthrough)
+branch  5 taken 96%
+    57213:  117:			preTreasure++;
+        -:  118:		}
+        -:  119:
+        -:  120:		/*Cutpurse played*/
+     2000:  121:		cardEffect(cutpurse, 0, 0, 0, &G, 0, 0);
+call    0 returned 100%
+        -:  122:
+     2000:  123:		int postTreasure = 0;
+   500065:  124:		for (i = 0; i < G.handCount[p]; i++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+   498065:  125:		if(G.hand[p][i] == copper || G.hand[p][i] == silver || G.hand[p][i] == gold) 
+branch  0 taken 96% (fallthrough)
+branch  1 taken 4%
+branch  2 taken 96% (fallthrough)
+branch  3 taken 4%
+branch  4 taken 4% (fallthrough)
+branch  5 taken 96%
+    56980:  126:			postTreasure++;
+        -:  127:		}
+        -:  128:
+        -:  129:
+        -:  130:		//collect copper count of all players
+     2000:  131:		int postCopper[numPlayers];
+        -:  132:
+     8046:  133:		for (i = 0; i < numPlayers; i++){
+branch  0 taken 75%
+branch  1 taken 25% (fallthrough)
+  1508229:  134:			for (j = 0; j < G.handCount[p]; j++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+  1502183:  135:				if(G.hand[i][j] == copper) 
+branch  0 taken 23% (fallthrough)
+branch  1 taken 77%
+   352092:  136:				count++;
+        -:  137:			}
+     6046:  138:			postCopper[i] = count;
+     6046:  139:			count = 0;
+        -:  140:			
+        -:  141:		}
+        -:  142:
+        -:  143:		/*Testing*/
+        -:  144:
+        -:  145:		//check to see cutpurse properly played from hand
+        -:  146:
+        -:  147:		//test fails
+     2000:  148:		if (G.playedCardCount != (prePlayedCount+1)){
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:  149:			printf("SEED %d FAIL: Played pile increased = %d, expected = 1\n", rSeed, (G.playedCardCount - prePlayedCount));
+call    0 never executed
+    #####:  150:			totalFails++;
+    #####:  151:			totalTests++;
+        -:  152:
+        -:  153:		}
+        -:  154:		else{
+     2000:  155:			totalPass++;
+     2000:  156:			totalTests++;
+        -:  157:		}
+        -:  158:
+        -:  159:		//check current players coins to see if silver was added 
+        -:  160:
+        -:  161:		//check current players coins to see if total values is +2
+        -:  162:
+     2000:  163:		if (postTreasure-2 != preTreasure){
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+     2000:  164:			printf("SEED %d FAIL: Player's coins increased = %d, expected = 2\n", rSeed, postTreasure - preTreasure);
+call    0 returned 100%
+     2000:  165:			totalFails++;
+     2000:  166:			totalTests++;
+        -:  167:		}
+        -:  168:		else{
+    #####:  169:			totalPass++;
+    #####:  170:			totalTests++;
+        -:  171:		}
+        -:  172:
+        -:  173:		//check other players to see if 1 copper was discarded if they had one
+        -:  174:
+     8046:  175:		for (i = 0; i < numPlayers; i++){
+branch  0 taken 75%
+branch  1 taken 25% (fallthrough)
+     6046:  176:			if (i != p){
+branch  0 taken 67% (fallthrough)
+branch  1 taken 33%
+     4046:  177:				if (postCopper[i] != preCopper[i]+1){
+branch  0 taken 99% (fallthrough)
+branch  1 taken 1%
+     4021:  178:					printf("SEED %d FAIL: Player's copper = %d, expected = 2\n", rSeed, postCopper[i], preCopper[i]+1);
+call    0 returned 100%
+     4021:  179:					totalFails++;
+     4021:  180:					totalTests++;
+        -:  181:				}
+        -:  182:				else{
+       25:  183:					totalPass++;
+       25:  184:					totalTests++;
+        -:  185:				}
+        -:  186:
+        -:  187:
+        -:  188:			}
+        -:  189:		}
+        -:  190:
+        -:  191:
+        -:  192:
+        -:  193:	}
+        -:  194:
+        1:  195:	printf("\nTotal tests: %d, Successful: %d, Failed: %d\n", totalTests, totalPass, totalFails);
+call    0 returned 100%
+        -:  196:
+        -:  197:
+        1:  198:	printf("\n");
+call    0 returned 100%
+        -:  199:
+        1:  200:	return 0;
+        -:  201:}
